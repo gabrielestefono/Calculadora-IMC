@@ -57,11 +57,9 @@ let verificarNumero = (valor)=>{
     // Função verifica o valor no input de altura e não permite mais que três numeros e uma vírgula
 let mostrarNoInputAltura = (valor)=>{
     let resultadoInput = altura.value.length;
-    console.log(valor)
     if(valor == null){
-        console.log(altura.value)
         if(altura.value.length == 1){
-            altura.value = ''
+            altura.value = '';
         }else{
             altura.setCustomValidity('');
             altura.reportValidity();
@@ -87,7 +85,6 @@ let mostrarNoInputAltura = (valor)=>{
     // Função verifica o valor no input de altura e não permite mais que uma vírgula
 let mostrarNoInputPeso = (valor)=>{
     let resultadoInput = peso.value.length;
-    console.log(valor)
     if(valor == null){
         peso.setCustomValidity('');
         peso.reportValidity();
@@ -110,7 +107,7 @@ let apagarUltimoValorAltura = (valor)=>{
         novo = altura.value.slice(0,-1);
         altura.value = novo;
         if(valor == ',' || valor == '.'){
-            if(altura.value == ""){
+            if(altura.value == ''){
                 altura.value = '0,';
                 altura.setCustomValidity('');
                 altura.reportValidity();
@@ -249,8 +246,8 @@ limpar.addEventListener('click', (event)=>{
     event.preventDefault();
     peso.removeAttribute('required');
     altura.removeAttribute('required');
-    peso.value = "";
-    altura.value = "";
+    peso.value = '';
+    altura.value = '';
     peso.setAttribute('required','');
     altura.setAttribute('required','');
 })
