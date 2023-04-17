@@ -20,7 +20,16 @@ let pesostr;
 let resultadoIMC;
 let classificacao;
 let obesidade;
+let resultadoTabela;
+let datap1;
+let datap2;
+let datap3;
 
+    //Criando elementos DOM
+resultadoTabela = document.createElement('div');
+datap1 = document.createElement('p');
+datap2 = document.createElement('p');
+datap3 = document.createElement('p');
 
 //  FUNÇÕES
     // Função de validação final
@@ -184,10 +193,6 @@ let mostrarResultado = (valor)=>{
         situacaoSpan.className = 'higher';
         obesidade = 'III';
     }
-    let resultadoTabela = document.createElement('div');
-    let datap1 = document.createElement('p');
-    let datap2 = document.createElement('p');
-    let datap3 = document.createElement('p');
     datap1.innerText = valor;
     datap2.innerText = classificacao;
     datap3.innerText = obesidade;
@@ -246,7 +251,12 @@ calcular.addEventListener('click', ()=>{
 })
 
 voltar.addEventListener('click', ()=>{
-
+    calculadora.className = '';
+    resultado.className = 'hide';
+    altura.value = '';
+    peso.value = '';
+    divTabela.removeChild(resultadoTabela);
+    resultadoTabela.remove();
 })
 
 //DEFINIÇÕES
