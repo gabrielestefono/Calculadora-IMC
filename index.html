@@ -14,15 +14,15 @@
     <div class="container">
         <div id="calc-container">
             <h2>Calculadora de IMC</h2>
-            <form id="imc-formn">
+            <form id="imc-formn" autocomplete="off">
                 <div class="form-inputs">
                     <div class="form-control">
                         <label for="height">Altura</label>
-                        <input type="text" name="height" id="height" placeholder="Exemplo: 1,75">
+                        <input type="text" name="height" id="height" placeholder="Exemplo: 1,75" required>
                     </div>
                     <div class="form-control">
                         <label for="weight">Peso</label>
-                        <input type="text" name="weight" id="weight" placeholder="Exemplo: 70,5">
+                        <input type="text" name="weight" id="weight" placeholder="Exemplo: 70,5" required>
                     </div>
                 </div>
                 <div class="action-control">
@@ -32,8 +32,8 @@
             </form>
         </div>
         <div id="result-container">
-            <p id="imc-number">Seu IMC: <span>25</span></p>
-            <p id="imc-info">Situação Atual: <span>Magresa</span></p>
+            <p id="imc-number">Seu IMC: <span></span></p>
+            <p id="imc-info">Situação Atual: <span></span></p>
             <h3>Cofira as classificações:</h3>
             <div id="imc-table">
                 <div class="table-header">
