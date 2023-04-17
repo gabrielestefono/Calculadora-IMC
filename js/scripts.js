@@ -13,6 +13,7 @@ let letrasInput;
 let novo = '';
 let alturastr;
 let pesostr;
+let resultadoIMC;
 
 
 //  FUNÇÕES
@@ -32,9 +33,9 @@ let validar = ()=>{
 let verificarNumero = (valor)=>{
     valor = parseFloat(valor.data);
     if(isNaN(valor)){
-        return false
+        return false;
     }else{
-        return true
+        return true;
     }
 }
 
@@ -78,8 +79,8 @@ let mostrarNoInputPeso = (valor)=>{
     // Caso o valor digitado for letra, uma segunda vírgula ou um quarto numero, essa função apaga imediatamente
 let apagarUltimoValorAltura = (valor)=>{
     if(valor != null){
-        novo = altura.value.slice(0,-1)
-        altura.value = novo
+        novo = altura.value.slice(0,-1);
+        altura.value = novo;
         if(valor == ',' || valor == '.'){
             altura.setCustomValidity('');
             altura.reportValidity();
@@ -88,20 +89,20 @@ let apagarUltimoValorAltura = (valor)=>{
             altura.reportValidity();
         }
     }else{
-        mostrarNoInputAltura(valor)
+        mostrarNoInputAltura(valor);
     }
-    novo = altura.value
+    novo = altura.value;
 }
 
     // Caso o valor digitado for letra ou uma segunda vírgula, essa função apaga imediatamente
 let apagarUltimoValorPeso = (valor)=>{
     if(valor != null){
-        novo = peso.value.slice(0,-1)
-        peso.value = novo
+        novo = peso.value.slice(0,-1);
+        peso.value = novo;
         if(valor == ',' || valor == '.'){
             if(peso.value.indexOf(',') == -1){
-                novo = peso.value + ','
-                peso.value = novo
+                novo = peso.value + ',';
+                peso.value = novo;
                 peso.setCustomValidity('');
                 peso.reportValidity();
             }else{
@@ -113,9 +114,9 @@ let apagarUltimoValorPeso = (valor)=>{
             peso.reportValidity();
         }
     }else{
-        mostrarNoInputPeso(valor)
+        mostrarNoInputPeso(valor);
     }
-    novo = peso.value
+    novo = peso.value;
 }
 
     // Coleta informação dos input's
@@ -132,6 +133,11 @@ let inputInfo = ()=>{
     pesostr = parseFloat(pesostr);
 }
 
+    // Calcula o IMC
+let calcularIMC = (valor1, valor2)=>{
+    return valor2 / (valor1 * valor1);
+}
+
 
 // LISTENERS
     // Escutador do input altura
@@ -140,7 +146,7 @@ altura.addEventListener('input', (numero)=>{
     if(numeroOuNao){
         mostrarNoInputAltura(numero.data);
     }else{
-        apagarUltimoValorAltura(numero.data)
+        apagarUltimoValorAltura(numero.data);
     }
 })
 
@@ -150,7 +156,7 @@ peso.addEventListener('input', (numero)=>{
     if(numeroOuNao){
         mostrarNoInputPeso(numero.data);
     }else{
-        apagarUltimoValorPeso(numero.data)
+        apagarUltimoValorPeso(numero.data);
     }
 })
 
@@ -159,16 +165,17 @@ limpar.addEventListener('click', (event)=>{
     event.preventDefault();
     peso.removeAttribute('required');
     altura.removeAttribute('required');
-    peso.value = ""
-    altura.value = ""
+    peso.value = "";
+    altura.value = "";
     peso.setAttribute('required','');
-    altura.setAttribute('required','')
+    altura.setAttribute('required','');
 })
 
     // Escutador do botão de envio
 calcular.addEventListener('click', (event)=>{
     inputInfo();
-    // Fazer cálculos
+    resultadoIMC = calcularIMC(alturastr, pesostr);
+    console.log(resultadoIMC)
     // Enviar para o resultado
     // Estilizar o resultado de acordo com o grau de obesidade
     // mostrar resultado
