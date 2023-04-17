@@ -11,6 +11,8 @@ let resultado = document.getElementById('result-container');
 let numeroOuNao = '';
 let letrasInput;
 let novo = '';
+let alturastr;
+let pesostr;
 
 
 //  FUNÇÕES
@@ -116,6 +118,20 @@ let apagarUltimoValorPeso = (valor)=>{
     novo = peso.value
 }
 
+    // Coleta informação dos input's
+let inputInfo = ()=>{
+    alturastr = altura.value;
+    pesostr = peso.value;
+    if(alturastr.indexOf(',') != -1){
+        alturastr = alturastr.replace(',', '.');
+    }
+    if(pesostr.indexOf(',') != -1){
+        pesostr = pesostr.replace(',', '.');
+    }
+    alturastr = parseFloat(alturastr);
+    pesostr = parseFloat(pesostr);
+}
+
 
 // LISTENERS
     // Escutador do input altura
@@ -151,7 +167,7 @@ limpar.addEventListener('click', (event)=>{
 
     // Escutador do botão de envio
 calcular.addEventListener('click', (event)=>{
-    // Coletar informações dos input's
+    inputInfo();
     // Fazer cálculos
     // Enviar para o resultado
     // Estilizar o resultado de acordo com o grau de obesidade
