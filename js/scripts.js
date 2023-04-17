@@ -57,24 +57,37 @@ let verificarNumero = (valor)=>{
     // Função verifica o valor no input de altura e não permite mais que três numeros e uma vírgula
 let mostrarNoInputAltura = (valor)=>{
     let resultadoInput = altura.value.length;
+    console.log(valor)
     if(valor == null){
-        altura.setCustomValidity('');
-        altura.reportValidity();
+        console.log(altura.value)
+        if(altura.value.length == 1){
+            altura.value = ''
+        }else{
+            altura.setCustomValidity('');
+            altura.reportValidity();
+        }
     }else if(resultadoInput <= 1){
         novo = valor + ',';
         altura.value = novo;
+        altura.setCustomValidity('');
+        altura.reportValidity();
     }else if(resultadoInput < 4){
         novo = novo + valor;
         altura.value = novo;
+        altura.setCustomValidity('');
+        altura.reportValidity();
     }else if(resultadoInput > 4){
         novo = altura.value.slice(0,-1);
         altura.value = novo;
+        altura.setCustomValidity('');
+        altura.reportValidity();
     }
 }
 
     // Função verifica o valor no input de altura e não permite mais que uma vírgula
 let mostrarNoInputPeso = (valor)=>{
     let resultadoInput = peso.value.length;
+    console.log(valor)
     if(valor == null){
         peso.setCustomValidity('');
         peso.reportValidity();
@@ -97,8 +110,14 @@ let apagarUltimoValorAltura = (valor)=>{
         novo = altura.value.slice(0,-1);
         altura.value = novo;
         if(valor == ',' || valor == '.'){
-            altura.setCustomValidity('');
-            altura.reportValidity();
+            if(altura.value == ""){
+                altura.value = '0,';
+                altura.setCustomValidity('');
+                altura.reportValidity();
+            }else{
+                altura.setCustomValidity('');
+                altura.reportValidity();
+            }
         }else{
             altura.setCustomValidity('Somente numeros, por favor!');
             altura.reportValidity();
