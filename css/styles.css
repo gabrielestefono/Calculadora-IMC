@@ -141,10 +141,14 @@ button:hover{
     color: #dbce12;
 }
 
-.medius{
+.medium{
     color: #db6212;
 }
 
 .high{
-    color: #db1912;
+    color: #bd3915;
+}
+
+.higher{
+    color: #FF0000;
 }

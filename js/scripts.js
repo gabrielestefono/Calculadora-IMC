@@ -6,6 +6,10 @@ let calculadora = document.getElementById('calc-container');
 let calcular = document.getElementById('calc-btn');
 let limpar = document.getElementById('clear-btn');
 let resultado = document.getElementById('result-container');
+let imcSpan = document.getElementById('imc');
+let situacaoSpan = document.getElementById('situacao');
+let divTabela = document.getElementById('imc-table');
+let voltar = document.getElementById('back-btn');
 
     // Variáveis de usabilidade
 let numeroOuNao = '';
@@ -14,6 +18,8 @@ let novo = '';
 let alturastr;
 let pesostr;
 let resultadoIMC;
+let classificacao;
+let obesidade;
 
 
 //  FUNÇÕES
@@ -138,6 +144,60 @@ let calcularIMC = (valor1, valor2)=>{
     return valor2 / (valor1 * valor1);
 }
 
+    // Mostrar resultado
+let mostrarResultado = (valor)=>{
+    imcSpan.innerText = valor;
+    if(valor < 18.5){
+        imcSpan.className = 'low';
+        classificacao = 'Magreza';
+        situacaoSpan.innerText = classificacao;
+        situacaoSpan.className = 'low';
+        obesidade = '0';
+    }else if(valor <= 24.9){
+        imcSpan.className = 'good';
+        classificacao = 'Peso Ideal';
+        situacaoSpan.innerText = classificacao;
+        situacaoSpan.className = 'good';
+        obesidade = '0';
+    }else if(valor <= 29.9){
+        imcSpan.className = 'low';
+        classificacao = 'Sobrepeso';
+        situacaoSpan.innerText = classificacao;
+        situacaoSpan.className = 'low';
+        obesidade = '0';
+    }else if(valor <= 34.9){
+        imcSpan.className = 'medium';
+        classificacao = 'Obseidade I';
+        situacaoSpan.innerText = classificacao;
+        situacaoSpan.className = 'medium';
+        obesidade = 'I';
+    }else if(valor <= 39.9){
+        imcSpan.className = 'high';
+        classificacao = 'Obesidade II';
+        situacaoSpan.innerText = classificacao;
+        situacaoSpan.className = 'high';
+        obesidade = 'II';
+    }else if(valor > 40){
+        imcSpan.className = 'higher';
+        classificacao = 'Obesidade III';
+        situacaoSpan.innerText = classificacao;
+        situacaoSpan.className = 'higher';
+        obesidade = 'III';
+    }
+    let resultadoTabela = document.createElement('div');
+    let datap1 = document.createElement('p');
+    let datap2 = document.createElement('p');
+    let datap3 = document.createElement('p');
+    datap1.innerText = valor;
+    datap2.innerText = classificacao;
+    datap3.innerText = obesidade;
+    resultadoTabela.appendChild(datap1);
+    resultadoTabela.appendChild(datap2);
+    resultadoTabela.appendChild(datap3);
+    divTabela.appendChild(resultadoTabela);
+    resultadoTabela.className = 'table-data';
+}
+
 
 // LISTENERS
     // Escutador do input altura
@@ -172,16 +232,21 @@ limpar.addEventListener('click', (event)=>{
 })
 
     // Escutador do botão de envio
-calcular.addEventListener('click', (event)=>{
-    inputInfo();
-    resultadoIMC = calcularIMC(alturastr, pesostr);
-    console.log(resultadoIMC)
-    // Enviar para o resultado
-    // Estilizar o resultado de acordo com o grau de obesidade
-    // mostrar resultado
-    event.preventDefault();
-    calculadora.className = 'hide';
-    resultado.className = '';
+calcular.addEventListener('click', ()=>{
+    validar();
+    calculadora.addEventListener('submit', (event)=>{
+        event.preventDefault();
+        inputInfo();
+        resultadoIMC = calcularIMC(alturastr, pesostr);
+        mostrarResultado(resultadoIMC.toFixed(1));
+        // mostrar resultado
+        calculadora.className = 'hide';
+        resultado.className = '';
+    })
+})
+
+voltar.addEventListener('click', ()=>{
+
 })
 
 //DEFINIÇÕES
